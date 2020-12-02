@@ -15,12 +15,22 @@
             <div v-else>
                 <a :class="field.classes" v-html="field.text" @click="openModal = true"/>
                 <portal to="modals">
-                    <transition name="fade">
                         <modal v-if="openModal" @modal-close="openModal = false">
                             <div class="bg-white rounded-lg shadow-lg overflow-hidden" style="width: 460px;">
                                 <div class="p-8">
                                     <heading :level="2" class="mb-6" v-html="field.confirm.title"></heading>
                                     <p class="text-80 leading-normal" v-html="field.confirm.body"></p>
+                                    <div style="padding-top: 2rem">
+                                        <input
+                                            ref="inputCustom"
+                                            v-if="field.showInput"
+                                            :id="field.name"
+                                            type="text"
+                                            class="w-full form-control form-input form-input-bordered"
+                                            :placeholder="field.name"
+                                            v-model="value"
+                                        />
+                                    </div>
                                 </div>
                                 <div
                                         class="border-t border-50 px-6 py-3 ml-auto flex items-center"
@@ -33,7 +43,6 @@
                                 </div>
                             </div>
                         </modal>
-                    </transition>
                 </portal>
             </div>
         </div>
@@ -44,7 +53,7 @@
     import {queue} from '../queue.js';
 
     export default {
-        props: ['resource', 'resourceName', 'resourceId', 'field'],
+        props: ['resource', 'resourceName', 'resourceId', 'field', 'value'],
         data() {
             return {
                 openModal: false
@@ -54,14 +63,14 @@
             reload() {
                 if (this.field.reload && queue.allowsReload()) {
                     window.setTimeout(() => {
-                        this.$router.go()
+                        this.$router.go();
                     }, 200)
                 }
             },
             modalReload() {
                 window.setTimeout(() => {
                     this.openModal = false;
-                    this.reload()
+                    this.reload();
                 }, 400)
             }
         }

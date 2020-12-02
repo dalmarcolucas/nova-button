@@ -28,7 +28,7 @@
 import { queue } from "../queue.js";
 
 export default {
-  props: ["resource", "resourceName", "resourceId", "field"],
+  props: ["resource", "resourceName", "resourceId", "field", "value"],
   data: () => ({
     buttonWidth: null,
     loading: false,
@@ -76,7 +76,8 @@ export default {
       return Nova.request().post(
         root + `${this.resourceName}/${this.resourceId}/${this.field.key}`,
         {
-          event: this.field.event
+          event: this.field.event,
+            value: this.value
         }
       );
     },

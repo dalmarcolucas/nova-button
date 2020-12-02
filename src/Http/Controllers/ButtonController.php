@@ -13,7 +13,7 @@ class ButtonController extends Controller
 
         $resource = $request->findModelQuery()->firstOrFail();
 
-        event(new $event($resource, $request->buttonKey));
+        event(new $event($resource, $request->buttonKey, $request->value));
 
         return response('ok', 200);
     }

@@ -55,6 +55,8 @@ class Button extends Field
 
     public $successClasses = null;
 
+    public $showInput = false;
+
     public function __construct($name, $key = null)
     {
         $this->name = $name;
@@ -96,6 +98,7 @@ class Button extends Field
             'successClasses' => $this->successClasses,
             'loadingText'    => $this->loadingText,
             'loadingClasses' => $this->loadingClasses,
+            'showInput'      => $this->showInput,
         ]);
     }
 
@@ -170,6 +173,12 @@ class Button extends Field
     public function visible($condition)
     {
         $this->visible = $condition;
+
+        return $this;
+    }
+
+    public function showInput(){
+        $this->showInput = true;
 
         return $this;
     }
