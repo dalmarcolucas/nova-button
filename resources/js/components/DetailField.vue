@@ -21,6 +21,17 @@
                                 <div class="p-8">
                                     <heading :level="2" class="mb-6" v-html="field.confirm.title"></heading>
                                     <p class="text-80 leading-normal" v-html="field.confirm.body"></p>
+                                    <div style="padding-top: 2rem">
+                                        <input
+                                                ref="inputCustom"
+                                                v-if="field.showInput"
+                                                :id="field.name"
+                                                type="text"
+                                                class="w-full form-control form-input form-input-bordered"
+                                                :placeholder="field.name"
+                                                v-model="value"
+                                        />
+                                    </div>
                                 </div>
                                 <div
                                     class="border-t border-50 px-6 py-3 ml-auto flex items-center"
@@ -45,7 +56,7 @@
 import { queue } from '../queue.js';
 
 export default {
-    props: ['resource', 'resourceName', 'resourceId', 'field'],
+    props: ['resource', 'resourceName', 'resourceId', 'field', 'value'],
     data() {
         return {
             openModal: false
