@@ -15,7 +15,6 @@
             <div v-else>
                 <a :class="field.classes" v-html="field.text" @click="openModal = true" />
                 <portal to="modals">
-                    <transition name="fade">
                         <modal v-if="openModal" @modal-close="openModal = false">
                             <div class="bg-white rounded-lg shadow-lg overflow-hidden" style="width: 460px;">
                                 <div class="p-8">
@@ -44,7 +43,6 @@
                                 </div>
                             </div>
                         </modal>
-                    </transition>
                 </portal>
             </div>
         </div>
